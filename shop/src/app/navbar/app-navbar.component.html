@@ -1,0 +1,42 @@
+<mat-toolbar color="primary" class="fixed-top">
+  <mat-toolbar-row>
+
+    <button mat-button routerLink="/" class="h4">
+      Shop
+    </button>
+
+    <span class="example-spacer"></span>
+    <div>
+      <button mat-button routerLink="/shopping-cart">
+        <mat-icon class="example-icon" aria-hidden="false" aria-label="cart icon">shopping_cart</mat-icon>
+        <span>
+            Cart
+        </span>
+        <span class="badge badge-warning badge-pill" *ngIf='cart$ | async as cart'>
+          {{ cart.totalItemsCount }}
+        </span>
+      </button>
+      <ng-template #anonymousUser>
+        <button mat-icon-button routerLink="/login">Login</button>
+      </ng-template>
+      <ng-container *ngIf="appUser; else anonymousUser">
+          <button mat-button [matMenuTriggerFor]="menuBar">
+              <mat-icon class="example-icon" aria-hidden="false" aria-label="settings icon">settings_applications</mat-icon>  
+            {{ appUser.name }}
+          </button>
+          <mat-menu #menuBar="matMenu" hasBackdrop="true">
+            <button mat-menu-item routerLink="/my/orders">
+                My Orders
+            </button>
+
+            <ng-container *ngIf='appUser.isAdmin'>
+              <button mat-menu-item routerLink="/admin/orders">Manage Orders</button>
+              <button mat-menu-item routerLink="/admin/products">Manage Products</button>
+            </ng-container>
+
+            <button mat-menu-item (click)="logout()"> Log Out </button>
+          </mat-menu>
+      </ng-container>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>

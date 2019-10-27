@@ -1,0 +1,59 @@
+<h1>Shopping Cart</h1>
+
+<div class="row col-10 margin-auto" *ngIf='cart$ | async as cart'>
+
+  <ng-container *ngIf="cart.totalItemsCount > 0;else noDataAvailable">
+    <p>
+      you have {{ cart.totalItemsCount }} items in your shopping cart.
+      <button *ngIf='cart.items.length' (click)="clearCart()" class="btn btn-light btn-sm">
+        Clear Shopping Cart
+      </button>
+    </p>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Product</th>
+          <th class="w-25 text-center">Quantity</th>
+          <th class="w-25 text-right">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor='let item of cart.items'>
+          <td class="d-flex justify-content-center">
+            <div [style.backgroundImage]="'url(' + item.product.imageUrl + ')'" class="thumbnail"></div>
+          </td>
+          <td>
+            {{ item.product.title }}
+          </td>
+          <td>
+            <app-product-quantity [shopping-cart]='cart' [product]='item.product'></app-product-quantity>
+          </td>
+          <td class="text-right">
+            {{ item.totalPrice| currency: 'INR':'symbol' }}
+          </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th class="text-right"> {{ cart.totalCount | currency: 'INR':'symbol' }} </th>
+        </tr>
+      </tfoot>
+    </table>
+    <div class="col p-0 d-flex flex-row-reverse">
+        <button *ngIf='cart.items.length' 
+        routerLink='/check-out' 
+        color="primary" mat-raised-button>Checkout</button>
+    </div>
+
+  </ng-container>
+</div>
+<ng-template #noDataAvailable>
+    <div class="alert alert-danger col">
+        Sorry no items are avaible in cart
+    </div>
+</ng-template>

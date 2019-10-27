@@ -1,0 +1,40 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import '~bootstrap/dist/css/bootstrap.css';
+
+body {
+    padding-top: 80px;
+}
+
+td.mat-cell, th.mat-header-cell {
+    padding: 0 16px !important;
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+button:focus {
+    outline: none !important;
+}
+
+.h4-text {
+    font-size: 1.5rem !important;
+}
+
+.margin-auto {
+    margin: 0 auto;
+}
+
+.table thead th {
+    border-bottom : none !important;
+}
+
+.list-group-item.active {
+    background-color: #3f51b5;
+    border-color: #3f51b5;
+}
+
+a {
+    color: #3f51b5;
+}

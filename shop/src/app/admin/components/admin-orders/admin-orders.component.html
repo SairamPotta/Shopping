@@ -1,0 +1,24 @@
+<h1> Orders </h1>
+<p>Total Orders are {{ (orders$ | async)?.length }}</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Customer Name</th>
+      <th>Date</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor='let order of orders$ | async | sorting:"datePlaced"'>
+      <td>
+        {{ order.shipping.name }}
+      </td>
+      <td>
+        {{ order.datePlaced | date: 'dd-MMM-yyyy  hh:mm' }}
+      </td>
+      <td>
+          <a [routerLink]="['/order-details/', order.key]">View</a>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,43 @@
+<h1>
+    Order Information
+</h1> 
+<div class="row" *ngIf="orderInfo">     
+  <div class="col-8">
+    <ul class="list-group">
+      <li class="list-group-item font-weight-bold">
+        <div class="row">
+          <div class="col-3">
+          </div>
+          <div class="col-5">Title</div>
+          <div class="col-2">Quantity</div>
+          <div class="col-2">Total Price</div>
+        </div>
+      </li>
+      <li class="list-group-item" *ngFor='let order of orderInfo.items'>
+        <div class="row">
+          <div class="col-3 d-flex justify-content-center">
+            <div [style.backgroundImage]="'url(' + order.product.imageUrl + ')'" class="thumbnail"></div>
+          </div>
+          <div class="col-5"> {{ order.product.title }} </div>
+          <div class="col-2"> {{ order.quantity }} </div>
+          <div class="col-2"> {{ order.totalPrice }} </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="col-4 top-fixed">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Deliver Address</h5>
+        <div class="card-text">
+            <div><b>Name : </b>{{ orderInfo.shipping.name }}</div>
+            <div><b>Address :</b>{{ orderInfo.shipping.addressLine1 }} , {{ orderInfo.shipping.addressLine2 }}</div>
+            <div><b>City :</b>{{ orderInfo.shipping.city }}</div>
+        </div>
+        <div class="card-footer mt-2">
+            Order placed on {{ orderInfo.datePlaced | date: 'dd MMM yyyy hh:mm'}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

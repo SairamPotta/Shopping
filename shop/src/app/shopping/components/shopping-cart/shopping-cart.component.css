@@ -1,0 +1,15 @@
+
+.thumbnail {
+    height: 80px;
+    width: 80px;
+    border-radius: 10px;
+    background-size: cover; 
+}
+
+table {
+    border: 1px solid #dee2e6;
+}
+
+.table td {
+    vertical-align: middle;
+}

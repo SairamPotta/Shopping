@@ -1,0 +1,34 @@
+<p>
+  <button routerLink='/admin/products/new' mat-raised-button color="primary">New Product</button>
+</p>
+
+<p>
+  <input #search (keyup)="applyFilter($event.target.value)" type="text" class="form-control">
+</p>
+
+<table mat-table [dataSource]="dataSource" class="col-12 table-striped border" matSort matSortDisableClear='true'>
+
+  <!-- Title Column -->
+  <ng-container matColumnDef="title">
+    <th mat-header-cell class="w-50" *matHeaderCellDef mat-sort-header> Title </th>
+    <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+  </ng-container>
+
+  <!-- Price Column -->
+  <ng-container matColumnDef="price">
+    <th mat-header-cell class="w-25" *matHeaderCellDef mat-sort-header> Price </th>
+    <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+  </ng-container>
+
+  <!-- Edit Column -->
+  <ng-container matColumnDef="edit">
+    <th mat-header-cell class="w-25" *matHeaderCellDef> </th>
+    <td mat-cell *matCellDef="let element">
+      <a [routerLink]="['/admin/products', element.key]">Edit</a>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
